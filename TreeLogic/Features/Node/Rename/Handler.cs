@@ -1,0 +1,28 @@
+using Mediator;
+using Microsoft.EntityFrameworkCore;
+using TreeDB;
+
+namespace TreeLogic.Features.Node.Rename;
+
+public class Handler(
+    AppDbContext db
+) : IRequestHandler<Request>
+{
+    public async ValueTask<Unit> Handle(Request request, CancellationToken cancellationToken)
+    {
+        if (await db.Set<TreeDB.Entities.Node>().Where(m => m.TreeName == request.TreeName && m.Name == request.NewNodeName).AnyAsync(cancellationToken))
+            throw new Exception($"Node name {request.NewNodeName} already exists");   
+        
+        var node = await db.Set<TreeDB.Entities.Node>()
+            .Where(m => m.TreeName == request.TreeName)
+            .Where(m => m.Id == request.NodeId)
+            .FirstOrDefaultAsync(cancellationToken)
+            ?? throw new Exception($"Node id {request.NodeId} not found");
+        
+        node.Name = request.NewNodeName;
+        
+        await db.SaveChangesAsync(cancellationToken);
+
+        return Unit.Value;
+    }
+}
