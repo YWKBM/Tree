@@ -1,6 +1,7 @@
 using Mediator;
 using Microsoft.EntityFrameworkCore;
 using TreeDB;
+using TreeLogic.Exceptions;
 
 namespace TreeLogic.Features.Node.Delete;
 
@@ -16,7 +17,7 @@ public class Handler(
                 .AnyAsync(cancellationToken)
            )
         {
-            throw new Exception("Unable to delete - node is parent");
+            throw new SecureException("Unable to delete - node is parent");
         }
 
         await db.Set<TreeDB.Entities.Node>()

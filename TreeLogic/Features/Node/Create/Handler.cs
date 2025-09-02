@@ -1,6 +1,7 @@
 using Mediator;
 using Microsoft.EntityFrameworkCore;
 using TreeDB;
+using TreeLogic.Exceptions;
 
 namespace TreeLogic.Features.Node.Create;
 
@@ -11,11 +12,11 @@ public class Handler(
     public async ValueTask<Unit> Handle(Request request, CancellationToken cancellationToken)
     {
         if (await db.Set<TreeDB.Entities.Node>().Where(m => m.TreeName == request.TreeName && m.Name == request.NodeName).AnyAsync(cancellationToken))
-            throw new Exception($"Node name {request.NodeName} already exists");
+            throw new SecureException($"Node name {request.NodeName} already exists");
 
         var parentNode = await db.Set<TreeDB.Entities.Node>()
             .FirstOrDefaultAsync(m => m.Id == request.ParentNodeId && m.TreeName == request.TreeName, cancellationToken)
-            ?? throw new Exception($"Parent node not found");
+            ?? throw new SecureException($"Parent node not found");
 
         await db.AddAsync(new TreeDB.Entities.Node
         {
