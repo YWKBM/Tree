@@ -1,7 +1,9 @@
+using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace TreeDB.Migrations;
 
+[DbContext(typeof(AppDbContext))]
 [Migration("m250907_193000_AddNodeTable")]
 public class m250907_193000_AddNodeTable : Migration
 {
