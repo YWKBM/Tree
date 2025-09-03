@@ -13,7 +13,7 @@ public class m250907_193000_AddNodeTable : Migration
             name: "Node",
             columns: t => new
             {
-                Id = t.Column<int>(),
+                Id = t.Column<int>(type: "serial"),
                 Name = t.Column<string>(),
                 ParentNodeId = t.Column<int>(nullable: true),
                 TreeName = t.Column<string>(defaultValue: string.Empty)

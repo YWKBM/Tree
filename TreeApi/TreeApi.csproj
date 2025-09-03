@@ -9,10 +9,15 @@
     <ItemGroup>
         <ProjectReference Include="../TreeLogic/TreeLogic.csproj" />
     </ItemGroup>
-    
+
     <ItemGroup>
-      <Folder Include="Controllers\" />
-      <Folder Include="Mapping\" />
+        <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.*" />
+    </ItemGroup>
+
+
+    <ItemGroup>
+      <Folder Include="Controllers\Journal\" />
+      <Folder Include="Controllers\Node\DTO\" />
       <Folder Include="Middlewares\" />
     </ItemGroup>
     

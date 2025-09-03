@@ -1,22 +1,15 @@
 using Microsoft.EntityFrameworkCore;
-using Npgsql;
 
 namespace TreeDB;
 
-public class AppDbContext(
-    DbConfig dbConfig) : DbContext
+public class AppDbContext : DbContext
 {
-    public DbSet<Entities.Node> Nodes { get; set; } = null!;
-    
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
     {
-        var dataSourceBuilder = new NpgsqlDataSourceBuilder(dbConfig.ConnectionString);
-        var dataSource = dataSourceBuilder.Build();
-        
-        optionsBuilder.UseNpgsql(dataSource, x =>  x.MigrationsAssembly("TreeDB"));
-        base.OnConfiguring(optionsBuilder);
     }
 
+    public DbSet<Entities.Node> Node { get; set; } = null!;
+    
     public void Init()
     {
         Database.Migrate();
