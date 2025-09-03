@@ -1,6 +1,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using Npgsql;
 using TreeDB;
+using TreeLogic.Services;
 
 namespace TreeLogic;
 
@@ -11,6 +12,7 @@ public static class LogicRegExtensions
         services.AddMediator(o => o.ServiceLifetime = ServiceLifetime.Scoped);
         services.AddDB(dataSource);
 
+        services.AddScoped<ExceptionService>();
     }
 
     public static IServiceProvider ConfigureLogic(this IServiceProvider serviceProvider)

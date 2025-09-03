@@ -18,7 +18,6 @@
     <ItemGroup>
       <Folder Include="Controllers\Journal\" />
       <Folder Include="Controllers\Node\DTO\" />
-      <Folder Include="Middlewares\" />
     </ItemGroup>
     
 </Project>

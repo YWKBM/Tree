@@ -10,6 +10,8 @@ public class AppDbContext : DbContext
 
     public DbSet<Entities.Node> Node { get; set; } = null!;
     
+    public DbSet<Entities.ErrorLog> ErrorLog { get; set; } = null!;
+    
     public void Init()
     {
         Database.Migrate();
