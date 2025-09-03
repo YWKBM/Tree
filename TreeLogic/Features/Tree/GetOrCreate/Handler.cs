@@ -31,16 +31,27 @@ public class Handler(
                 Children = [],
             };
         }
+        
         var treeNodes = new List<TreeDB.Entities.Node>();
         
         var queue = new Queue<TreeDB.Entities.Node>();
-        queue.Enqueue(root);
+        
+        var rootChildNodes = await db.Set<TreeDB.Entities.Node>()
+            .Where(m => m.ParentNodeId == root.Id)
+            .AsNoTracking()
+            .ToListAsync(cancellationToken);
+        
+        foreach (var node in rootChildNodes) {queue.Enqueue(node);}
         
         while (queue.TryDequeue(out var node))
         {
+            if (treeNodes.Contains(node)) continue;
+            
             treeNodes.Add(node);
             
             var childNodes = await db.Set<TreeDB.Entities.Node>()
+                .Where(m => m.ParentNodeId == node.Id)
+                .AsNoTracking()
                 .ToListAsync(cancellationToken);
             
             foreach (var childNode in childNodes) queue.Enqueue(childNode);
