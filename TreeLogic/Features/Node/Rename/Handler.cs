@@ -12,7 +12,7 @@ public class Handler(
     public async ValueTask<Unit> Handle(Request request, CancellationToken cancellationToken)
     {
         if (await db.Set<TreeDB.Entities.Node>().Where(m => m.TreeName == request.TreeName && m.Name == request.NewNodeName).AnyAsync(cancellationToken))
-            throw new SecureException($"Node name {request.NewNodeName} already exists");   
+            throw new SecureException($"Node name {request.NewNodeName} already exists");  
         
         var node = await db.Set<TreeDB.Entities.Node>()
             .Where(m => m.TreeName == request.TreeName)
@@ -20,10 +20,16 @@ public class Handler(
             .FirstOrDefaultAsync(cancellationToken)
             ?? throw new SecureException($"Node id {request.NodeId} not found");
         
+        if (node.ParentNodeId == null)
+        {
+            await db.Set<TreeDB.Entities.Node>().Where(m => m.TreeName == node.TreeName)
+                .ExecuteUpdateAsync(t => t.SetProperty(m => m.TreeName, request.NewNodeName), cancellationToken);
+        }
+        
         node.Name = request.NewNodeName;
         
         await db.SaveChangesAsync(cancellationToken);
-
+        
         return Unit.Value;
     }
 }
