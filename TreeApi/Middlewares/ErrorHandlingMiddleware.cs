@@ -1,12 +1,13 @@
 using System.Text.Json;
 using TreeApi.Middlewares.DTO;
+using TreeLogic.Services;
 
 namespace TreeApi.Middlewares;
 
 public class ErrorHandlingMiddleware
     (
         RequestDelegate next,
-        TreeLogic.Services.ExceptionService exceptionService
+        IServiceProvider serviceProvider
     )
 {
     public async Task InvokeAsync(HttpContext context)
@@ -23,7 +24,10 @@ public class ErrorHandlingMiddleware
 
     private async Task handleException(HttpContext context, Exception ex)
     {
-        var eventId = await exceptionService.AddToJournal(ex, context.Request.Query.ToString());
+        using var scope = serviceProvider.CreateScope();
+        
+        var exceptionService = scope.ServiceProvider.GetRequiredService<ExceptionService>();
+        var eventId = await exceptionService.AddToJournal(ex, context.Request.QueryString.Value);
         
         context.Response.ContentType = "application/json";
         context.Response.StatusCode = 500;
