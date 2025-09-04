@@ -12,6 +12,7 @@ public class ErrorLogMapping : Profile
         
         // GetRange
         CreateMap<TreeLogic.Features.Journal.GetRange.Result, GetRangeResponse>();
+        CreateMap<TreeLogic.Features.Journal.GetRange.Result.Item, GetRangeResponse.Item>();
     }
 
 }

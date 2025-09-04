@@ -10,7 +10,7 @@ public class JournalController(
     IMapper mapper) : ControllerBase
 {
     [HttpGet("api.user.journal.getSingle")]
-    public async Task<ActionResult<GetSingleResponse>> GetSingle([FromBody] int id)
+    public async Task<ActionResult<GetSingleResponse>> GetSingle([FromQuery] int id)
     {
         var request = new TreeLogic.Features.Journal.Get.Request()
         {
@@ -23,7 +23,7 @@ public class JournalController(
     }
     
     [HttpGet("api.user.journal.getRange")]
-    public async Task<ActionResult<GetRangeResponse>> GetRange([FromBody] int skip, [FromBody] int take)
+    public async Task<ActionResult<GetRangeResponse>> GetRange([FromQuery] int skip, [FromQuery] int take)
     {
         var request = new TreeLogic.Features.Journal.GetRange.Request()
         {

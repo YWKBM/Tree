@@ -5,8 +5,8 @@ using Microsoft.AspNetCore.Mvc;
 namespace TreeApi.Controllers.Node;
 
 public class NodeController(
-    IMediator mediator,
-    IMapper mapper) : ControllerBase
+    IMediator mediator
+    ) : ControllerBase
 {
     [HttpPost("api.user.tree.node.create")]
     public async Task<ActionResult> CreateNode([FromQuery] string treeName, [FromQuery] int parentNodeId, [FromQuery] string nodeName)
