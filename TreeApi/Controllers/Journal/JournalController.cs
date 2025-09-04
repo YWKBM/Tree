@@ -9,6 +9,7 @@ public class JournalController(
     IMediator mediator,
     IMapper mapper) : ControllerBase
 {
+    [HttpGet("api.user.journal.getSingle")]
     public async Task<ActionResult<GetSingleResponse>> GetSingle([FromBody] int id)
     {
         var request = new TreeLogic.Features.Journal.Get.Request()
@@ -20,7 +21,8 @@ public class JournalController(
         
         return mapper.Map<GetSingleResponse>(result);
     }
-
+    
+    [HttpGet("api.user.journal.getRange")]
     public async Task<ActionResult<GetRangeResponse>> GetRange([FromBody] int skip, [FromBody] int take)
     {
         var request = new TreeLogic.Features.Journal.GetRange.Request()

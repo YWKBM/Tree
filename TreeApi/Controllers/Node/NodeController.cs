@@ -8,7 +8,7 @@ public class NodeController(
     IMediator mediator,
     IMapper mapper) : ControllerBase
 {
-    [HttpPost("api.user.tree.create")]
+    [HttpPost("api.user.tree.node.create")]
     public async Task<ActionResult> CreateNode([FromQuery] string treeName, [FromQuery] int parentNodeId, [FromQuery] string nodeName)
     {
         await mediator.Send(new TreeLogic.Features.Node.Create.Request
@@ -21,7 +21,7 @@ public class NodeController(
         return Ok();
     }
     
-    [HttpPost("api.user.tree.delete")]
+    [HttpPost("api.user.tree.node.delete")]
     public async Task<ActionResult> DeleteNode([FromQuery] string treeName, [FromQuery] int nodeId)
     {
         await mediator.Send(new TreeLogic.Features.Node.Delete.Request
@@ -33,7 +33,7 @@ public class NodeController(
         return Ok();
     }
     
-    [HttpPost("api.user.tree.rename")]
+    [HttpPost("api.user.tree.node.rename")]
     public async Task<ActionResult> RenameNode([FromQuery] string treeName, [FromQuery] int nodeId, [FromQuery] string newNodeName)
     {
         await mediator.Send(new TreeLogic.Features.Node.Rename.Request{
