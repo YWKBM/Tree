@@ -10,12 +10,14 @@ public class Handler(
 {
     public async ValueTask<Result> Handle(Request request, CancellationToken cancellationToken)
     {
-        var query = db.Set<TreeDB.Entities.ErrorLog>()
+        var query = db.Set<TreeDB.Entities.ErrorLog>();
+        var count = await query.CountAsync(cancellationToken);
+        
+        var paged = query    
             .Skip(request.Skip)
             .Take(request.Take);
         
-        var count = await query.CountAsync(cancellationToken);
-        var items = await query.Select(m => new Result.Item
+        var items = await paged.Select(m => new Result.Item
         {
             Id = m.Id,
             EventId = m.EventId.ToString(),
