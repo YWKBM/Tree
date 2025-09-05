@@ -6,6 +6,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TreeLogic", "TreeLogic\Tree
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TreeApi", "TreeApi\TreeApi.csproj", "{EF19B832-0C1D-40F5-BEEF-E1D79FA7918F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TreeApiTest", "TreeApiTest\TreeApiTest.csproj", "{F6C5FF94-2D24-44AF-8E3C-E47D759EEA2A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -24,5 +26,9 @@ Global
 		{EF19B832-0C1D-40F5-BEEF-E1D79FA7918F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EF19B832-0C1D-40F5-BEEF-E1D79FA7918F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EF19B832-0C1D-40F5-BEEF-E1D79FA7918F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F6C5FF94-2D24-44AF-8E3C-E47D759EEA2A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F6C5FF94-2D24-44AF-8E3C-E47D759EEA2A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F6C5FF94-2D24-44AF-8E3C-E47D759EEA2A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F6C5FF94-2D24-44AF-8E3C-E47D759EEA2A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

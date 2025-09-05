@@ -1,0 +1,19 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net8.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
+    
+    <ItemGroup>
+        <PackageReference Include="NUnit" Version="3.*" />
+        <PackageReference Include="NUnit3TestAdapter" Version="3.*" />
+        <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.*" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="../TreeApi/TreeApi.csproj" />
+    </ItemGroup>
+
+</Project>
