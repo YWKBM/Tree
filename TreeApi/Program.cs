@@ -4,8 +4,9 @@ using TreeApi.Middlewares;
 using TreeLogic;
 
 var builder = WebApplication.CreateBuilder(args);
-var dataSource = new NpgsqlDataSourceBuilder("Host=localhost;Port=5432;Database=Tree;Username=postgres;Password=123456").Build();
 
+var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+var dataSource = new NpgsqlDataSourceBuilder(connectionString).Build();
 
 builder.Logging.ClearProviders();
 builder.Logging.SetMinimumLevel(Microsoft.Extensions.Logging.LogLevel.Trace);
