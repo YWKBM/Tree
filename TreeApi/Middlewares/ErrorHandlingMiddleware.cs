@@ -10,6 +10,8 @@ public class ErrorHandlingMiddleware
         IServiceProvider serviceProvider
     )
 {
+    private static readonly NLog.Logger log = NLog.LogManager.GetCurrentClassLogger();
+    
     public async Task InvokeAsync(HttpContext context)
     {
         try
@@ -19,6 +21,7 @@ public class ErrorHandlingMiddleware
         catch (Exception ex)
         {
             await handleException(context, ex);
+            log.Error(ex);
         }
     }
 

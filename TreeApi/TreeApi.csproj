@@ -9,6 +9,11 @@
     <ItemGroup>
         <ProjectReference Include="../TreeLogic/TreeLogic.csproj" />
     </ItemGroup>
+    
+    <ItemGroup>
+        <PackageReference Include="NLog" Version="5.*" />
+        <PackageReference Include="NLog.Web.AspNetCore" Version="5.*" />
+    </ItemGroup>
 
     <ItemGroup>
         <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.*" />
